@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config()
 
-const DB =
-  "mongodb+srv://namit:namit@cluster0.oy6wg15.mongodb.net/?retryWrites=true&w=majority";
-
+const DB = process.env.DB_URL
 mongoose
   .connect(DB)
   .then(() => {
