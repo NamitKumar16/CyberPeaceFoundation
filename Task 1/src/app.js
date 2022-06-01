@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const hbs = require("hbs");
+const res = require("express/lib/response");
 require("dotenv").config();
 require("./db/conn");
 
@@ -16,6 +17,12 @@ hbs.registerPartials(partials_path)
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/login",(req,res)=>{
+  res.render("login")
+})
+app.get("/register",(req,res)=>{
+  res.render("register")
+})
 
 app.listen(port, () => {
   console.log("Server is running at port number " + port);
