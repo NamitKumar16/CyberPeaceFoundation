@@ -32,6 +32,23 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
+app.post("/login", async (req, res) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const useremail = await User.findOne({ email: email });
+    if(useremail.password===password){
+      res.status(201).render("dashboard")
+    }
+    else{
+      res.send("Invalid login details")
+    }
+  } catch (error) {
+    res.status(400).send("invalid login details");
+  }
+});
+
 app.post("/register", (req, res) => {
   console.log("In if");
   const registerUser = {
@@ -41,13 +58,10 @@ app.post("/register", (req, res) => {
     password: req.body.password,
   };
 
-  // res.status(201).render("index")
   var promise = userController.saveData(registerUser);
-  promise
-    .then(res.status(201).render("index"))
-    .catch((error) => {
-      res.status(404);
-    });
+  promise.then(res.status(201).render("dashboard")).catch((error) => {
+    res.status(404);
+  });
 });
 
 app.listen(port, () => {
