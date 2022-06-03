@@ -3,34 +3,20 @@ const path = require("path");
 const app = express();
 const hbs = require("hbs");
 const res = require("express/lib/response");
+const cors = require("cors");
+
+app.use(cors());
 require("dotenv").config();
 
 require("./db/conn");
-const userController = require("../src/services/user");
-
+const userController = require("./services/user");
 const User = require("./models/user");
 
 const port = process.env.PORT || 3000;
-
-const template_path = path.join(__dirname, "../templates/views");
-const partials_path = path.join(__dirname, "../templates/partials");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.set("view engine", "hbs");
-app.set("views", template_path);
-hbs.registerPartials(partials_path);
-
-app.get("/", (req, res) => {
-  res.render("index");
-});
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-app.get("/register", (req, res) => {
-  res.render("register");
-});
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.post("/login", async (req, res) => {
   try {
@@ -38,14 +24,15 @@ app.post("/login", async (req, res) => {
     const password = req.body.password;
 
     const useremail = await User.findOne({ email: email });
-    if(useremail.password===password){
-      res.status(201).render("dashboard")
-    }
-    else{
-      res.send("Invalid login details")
+    if (useremail.password === password) {
+      res.status(200).json({
+        firstname: useremail.firstname,
+      });
+    } else {
+      res.status(404).send("Invalid Details");
     }
   } catch (error) {
-    res.status(400).send("invalid login details");
+    res.status(500).send("Server Error");
   }
 });
 
@@ -59,9 +46,15 @@ app.post("/register", (req, res) => {
   };
 
   var promise = userController.saveData(registerUser);
-  promise.then(res.status(201).render("dashboard")).catch((error) => {
-    res.status(404);
-  });
+  promise
+    .then(
+      res.status(200).json({
+        firstname: registerUser.firstname,
+      })
+    )
+    .catch((error) => {
+      res.status(500).send("Server error");
+    });
 });
 
 app.listen(port, () => {
