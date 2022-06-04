@@ -27,6 +27,7 @@ app.post("/login", async (req, res) => {
     if (useremail.password === password) {
       res.status(200).json({
         firstname: useremail.firstname,
+        email: useremail.email,
       });
     } else {
       res.status(404).send("Invalid Details");
@@ -50,6 +51,7 @@ app.post("/register", (req, res) => {
     .then(
       res.status(200).json({
         firstname: registerUser.firstname,
+        email: registerUser.email,
       })
     )
     .catch((error) => {

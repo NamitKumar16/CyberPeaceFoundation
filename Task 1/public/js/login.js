@@ -13,6 +13,7 @@ function login() {
       console.log(http.responseText);
       var json = JSON.parse(this.responseText);
       localStorage.setItem("name", json.firstname);
+      localStorage.setItem("email", json.email);
       location.href = "dashboard.html";
     }
   };

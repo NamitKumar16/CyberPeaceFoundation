@@ -6,6 +6,7 @@ function register() {
   email = document.querySelector("#email").value;
   password = document.querySelector("#password").value;
   localStorage.setItem("name", firstname);
+  localStorage.setItem("email", email);
   var user = {
     firstname: firstname,
     lastname: lastname,
