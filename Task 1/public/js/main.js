@@ -88,3 +88,6 @@ if (fname == null) {
     });
   })(jQuery);
 }
+function logout() {
+  localStorage.removeItem("name");
+}
