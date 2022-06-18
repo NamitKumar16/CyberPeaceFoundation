@@ -1,13 +1,21 @@
 const fname = localStorage.getItem("name");
 const email = localStorage.getItem("email");
 
-if (fname == null) {
-  location.href = "/";
-} else {
-  var username = email.substring(0, email.indexOf("@"));
-  document.getElementById("name").innerText = fname;
-  document.getElementById("email").innerText = username;
+// ./../json/dashboard.json
 
+const url = "../json/dashboard.json";
+var jD;
+function get_dashboard() {
+  fetch(url)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      setJsonData(data);
+    });
+}
+function setJsonData(data) {
   (function ($) {
     "use strict";
 
@@ -36,22 +44,26 @@ if (fname == null) {
       },
       { offset: "80%" }
     );
+    document.getElementById("tUsers").innerText = data.total_users;
+    document.getElementById("bUsers").innerText = data.blocked_users;
+    document.getElementById("bSites").innerText = data.blacklisted_sites;
+    document.getElementById("vUrl").innerText = data.visited_url;
 
     // Worldwide Sales Chart
     var ctx1 = $("#users").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
       type: "bar",
       data: {
-        labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+        labels: data.users_chart.labels,
         datasets: [
           {
             label: "Allowed Users",
-            data: [150000, 300000, 550000, 650000, 700000, 800000, 950000],
+            data: data.users_chart.allowed_users,
             backgroundColor: "rgba(0, 156, 255, .7)",
           },
           {
             label: "Blocked users",
-            data: [30000, 85000, 110000, 150000, 200000, 250000, 350000],
+            data: data.users_chart.blocked_users,
             backgroundColor: "rgba(255, 0, 0, .7)",
           },
         ],
@@ -66,17 +78,17 @@ if (fname == null) {
     var myChart2 = new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+        labels: data.stats_chart.labels,
         datasets: [
           {
             label: "Normal",
-            data: [15000, 20000, 19000, 25000, 23000, 30000, 33500],
+            data: data.stats_chart.normal,
             backgroundColor: "rgba(0, 156, 255, .5)",
             fill: true,
           },
           {
             label: "Blocked",
-            data: [9900, 12000, 11000, 15000, 14000, 20000, 22000],
+            data: data.stats_chart.blocked,
             backgroundColor: "rgba(255, 0, 0, 1)",
             fill: true,
           },
@@ -87,6 +99,26 @@ if (fname == null) {
       },
     });
   })(jQuery);
+  $(document).ready(function () {
+    $("#example").DataTable({
+      data: data.visited_url_table,
+      columns: [
+        { title: "Links" },
+        { title: "Classification" },
+        { title: "User_agent" },
+        { title: "Status" },
+      ],
+    });
+  });
+}
+
+if (fname == null) {
+  location.href = "/";
+} else {
+  get_dashboard();
+  var username = email.substring(0, email.indexOf("@"));
+  document.getElementById("name").innerText = fname;
+  document.getElementById("email").innerText = username;
 }
 function logout() {
   localStorage.removeItem("name");

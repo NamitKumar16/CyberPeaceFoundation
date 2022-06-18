@@ -14,14 +14,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/372a4b2b76.js" crossorigin="anonymous"></script>
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
     <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -79,7 +78,7 @@
                             <i class="fa-solid fa-user fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Users</p>
-                                <h6 class="mb-0">1234</h6>
+                                <h6 class="mb-0" id="tUsers">1234</h6>
                             </div>
                         </div>
                     </div>
@@ -88,7 +87,7 @@
                             <i class="fa-solid fa-xmark fa-3x text-danger"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Blocked Users</p>
-                                <h6 class="mb-0">1234</h6>
+                                <h6 class="mb-0" id="bUsers">1234</h6>
                             </div>
                         </div>
                     </div>
@@ -97,7 +96,7 @@
                             <i class="fa-solid fa-circle-xmark text-danger fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Blacklisted Sites</p>
-                                <h6 class="mb-0">4567</h6>
+                                <h6 class="mb-0" id="bSites">4567</h6>
                             </div>
                         </div>
                     </div>
@@ -106,7 +105,7 @@
                             <i class="fa-solid fa-blog fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Visited URL</p>
-                                <h6 class="mb-0">234</h6>
+                                <h6 class="mb-0" id="vUrl">234</h6>
                             </div>
                         </div>
                     </div>
@@ -139,45 +138,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Visited URL</h6>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col">Links</th>
-                                    <th scope="col">Classification</th>
-                                    <th scope="col">UserAgent</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>rediffmail.com</td>
-                                    <td>web-based-mail</td>
-                                    <td>Chrome/62.0.3202.84</td>
-                                    <td><button class="btn btn-sm btn-primary">200 OK</button></td>
-                                </tr>
-                                <tr>
-                                    <td>youtube.com</td>
-                                    <td>entertainment</td>
-                                    <td>Chrome/62.0.3202.84</td>
-                                    <td><button class="btn btn-sm btn-primary">200 OK</button></td>
-                                </tr>
-                                <tr>
-                                    <td>miniclip.com</td>
-                                    <td>games</td>
-                                    <td>Chrome/62.0.3202.84</td>
-                                    <td><button class="btn btn-sm btn-primary">200 OK</button></td>
-                                </tr>
-                                <tr>
-                                    <td>spotify.com</td>
-                                    <td>music</td>
-                                    <td>Chrome/62.0.3202.84</td>
-                                    <td><button class="btn btn-sm btn-primary">200 OK</button></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
+                    <table id="example" class="display" width="100%"></table>
                 </div>
             </div>
         </div>
@@ -189,10 +150,10 @@
     <script src="../lib/chart/chart.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
     <script src="../lib/waypoints/waypoints.min.js"></script>
-    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../lib/tempusdominus/js/moment.min.js"></script>
     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>

@@ -1,0 +1,26 @@
+{
+  "total_users": 1000,
+  "blocked_users": 500,
+  "blacklisted_sites": 100,
+  "visited_url": 3000,
+  "stats_chart": {
+    "labels": ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+
+    "normal": [15000, 20000, 19000, 25000, 23000, 30000, 33500],
+
+    "blocked": [9900, 12000, 11000, 15000, 14000, 20000, 22000]
+  },
+  "users_chart": {
+    "labels": ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+
+    "allowed_users": [150000, 300000, 550000, 650000, 700000, 800000, 950000],
+
+    "blocked_users": [30000, 85000, 110000, 150000, 200000, 250000, 350000]
+  },
+  "visited_url_table": [
+    ["rediffmail.com", "web-based-mail", "Chrome/62.0.3202.84", "200 OK"],
+    ["youtube.com", "entertainment", "Chrome/62.0.3202.84", "200 OK"],
+    ["miniclip.com", "games", "Chrome/62.0.3202.84", "200 OK"],
+    ["spotify.com", "music", "Chrome/62.0.3202.84", "200 OK"]
+  ]
+}
